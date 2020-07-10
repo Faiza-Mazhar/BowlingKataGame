@@ -5,34 +5,39 @@ class Game {
     private val rollScore: IntArray = IntArray(21)
     private var currentRoll = 0
 
-    private val _BEST_SCORE = 10
-    private val _FRAME_SIZE = 10
+    private val BEST_SCORE = 10
+    private val FRAME_SIZE = 10
 
-    fun rollBall(pins: Int) {
+    fun rollBall(pins: Int) : Int {
         rollScore[ currentRoll++ ] = pins
+        return currentRoll
     }
 
     fun getScore() :Int {
         var score = 0
         var frameIndex = 0
-        for(index in 0 until _FRAME_SIZE){
+        for(index in 0 until FRAME_SIZE){
 
-            if(isSpare(frameIndex)){ //spare
-                score += spareBonus(frameIndex) + _BEST_SCORE
-                frameIndex += 2
-            } else if(isStrike(frameIndex)) {
-                score += getStrikeBonus(frameIndex) + _BEST_SCORE
-                frameIndex += 1
-            }else {
-                score += getFrameScore(frameIndex)
-                frameIndex += 2
+            when {
+                isSpare(frameIndex) -> {
+                    score += spareBonus(frameIndex) + BEST_SCORE
+                    frameIndex += 2
+                }
+                isStrike(frameIndex) -> {
+                    score += getStrikeBonus(frameIndex) + BEST_SCORE
+                    frameIndex += 1
+                }
+                else -> {
+                    score += getFrameScore(frameIndex)
+                    frameIndex += 2
+                }
             }
         }
         return score
     }
 
     private fun isSpare(frameIndex : Int) :Boolean {
-        return rollScore[frameIndex] + rollScore[frameIndex + 1] == _BEST_SCORE
+        return rollScore[frameIndex] + rollScore[frameIndex + 1] == BEST_SCORE
     }
 
     private fun spareBonus(frameIndex: Int): Int {
@@ -44,7 +49,7 @@ class Game {
     }
 
     private fun isStrike(frameIndex: Int) :Boolean {
-        return rollScore[frameIndex] == _BEST_SCORE
+        return rollScore[frameIndex] == BEST_SCORE
     }
 
     private fun getStrikeBonus(frameIndex: Int) : Int {

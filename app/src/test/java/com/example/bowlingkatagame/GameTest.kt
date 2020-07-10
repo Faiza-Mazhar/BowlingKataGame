@@ -21,7 +21,7 @@ class GameTest {
     @Test
     fun `Test gutter game`(){
         rollMultiplesBall(20, 0)
-        Assert.assertEquals(0, 0)
+        Assert.assertEquals(0, game.getScore())
     }
 
     @Test
@@ -33,6 +33,7 @@ class GameTest {
     @Test
     fun `test that spare is counted`() {
         rollSpare()
+
         game.rollBall(4)
 
         rollMultiplesBall(17, 0)
