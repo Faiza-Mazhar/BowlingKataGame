@@ -8,9 +8,8 @@ class Game {
     private val bestScore = 10
     private val maxFrameSize = 10
 
-    fun rollBall(pins: Int) : Int {
+    fun rollBall(pins: Int) {
         rollScore[ currentRoll++ ] = pins
-        return currentRoll
     }
 
     fun getScore() :Int {

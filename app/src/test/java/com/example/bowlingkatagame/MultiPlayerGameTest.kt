@@ -63,7 +63,7 @@ class MultiPlayerGameTest {
     }
 
     @Test
-    fun `after 10 frame, game is finished and no more balls can be rolled` () {
+    fun `after 10 frames, game is finished and no more balls can be rolled` () {
         rollFullGame()
         setFrameScoresForCurrentPlayer(3, 3)
 
@@ -81,12 +81,13 @@ class MultiPlayerGameTest {
     }
 
     private fun rollFullGame () {
-        for(index in playerList.indices){
-            for(frameIndex in 0 .. 9 ){
+        for(frameIndex in 0 .. 9 ){
+            for(index in playerList.indices){
                 setFrameScoresForCurrentPlayer(1, 1)
             }
         }
     }
+
     private fun setFrameScoresForCurrentPlayer(firstRoll: Int, secondRoll: Int) {
         multiPlayerGame.setFrameScore(firstRoll, secondRoll)
     }

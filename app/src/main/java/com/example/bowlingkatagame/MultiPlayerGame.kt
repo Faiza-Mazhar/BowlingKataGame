@@ -4,7 +4,7 @@ package com.example.bowlingkatagame
 
 class MultiPlayerGame(private val playerList: List<Game>) {
 
-    var currentPlayer = 0;
+    var currentPlayer = 0 //private set
     private val maxNoOfFrame = 10
     private var currentFrame = 0
     private val strikeScore: Int = 10
