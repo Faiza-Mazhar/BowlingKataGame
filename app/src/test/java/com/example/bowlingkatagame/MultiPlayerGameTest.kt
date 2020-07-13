@@ -65,7 +65,7 @@ class MultiPlayerGameTest {
     @Test
     fun `after 10 frame, game is finished and no more balls can be rolled` () {
         rollFullGame()
-        setFrameScoresForCurrentPlayer(7, 9)
+        setFrameScoresForCurrentPlayer(3, 3)
 
         val expectedPlayer = playerList.size - 1
         Assert.assertEquals(expectedPlayer, multiPlayerGame.currentPlayer)

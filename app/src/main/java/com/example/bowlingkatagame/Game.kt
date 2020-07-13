@@ -5,8 +5,8 @@ class Game {
     private val rollScore: IntArray = IntArray(21)
     private var currentRoll = 0
 
-    private val BEST_SCORE = 10
-    private val FRAME_SIZE = 10
+    private val bestScore = 10
+    private val maxFrameSize = 10
 
     fun rollBall(pins: Int) : Int {
         rollScore[ currentRoll++ ] = pins
@@ -16,15 +16,15 @@ class Game {
     fun getScore() :Int {
         var score = 0
         var frameIndex = 0
-        for(index in 0 until FRAME_SIZE){
+        for(index in 0 until maxFrameSize){
 
             when {
                 isSpare(frameIndex) -> {
-                    score += spareBonus(frameIndex) + BEST_SCORE
+                    score += spareBonus(frameIndex) + bestScore
                     frameIndex += 2
                 }
                 isStrike(frameIndex) -> {
-                    score += getStrikeBonus(frameIndex) + BEST_SCORE
+                    score += getStrikeBonus(frameIndex) + bestScore
                     frameIndex += 1
                 }
                 else -> {
@@ -37,7 +37,7 @@ class Game {
     }
 
     private fun isSpare(frameIndex : Int) :Boolean {
-        return rollScore[frameIndex] + rollScore[frameIndex + 1] == BEST_SCORE
+        return rollScore[frameIndex] + rollScore[frameIndex + 1] == bestScore
     }
 
     private fun spareBonus(frameIndex: Int): Int {
@@ -49,7 +49,7 @@ class Game {
     }
 
     private fun isStrike(frameIndex: Int) :Boolean {
-        return rollScore[frameIndex] == BEST_SCORE
+        return rollScore[frameIndex] == bestScore
     }
 
     private fun getStrikeBonus(frameIndex: Int) : Int {

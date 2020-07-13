@@ -5,22 +5,23 @@ package com.example.bowlingkatagame
 class MultiPlayerGame(private val playerList: List<Game>) {
 
     var currentPlayer = 0;
-    private val MAX_FRAME = 10
+    private val maxNoOfFrame = 10
     private var currentFrame = 0
+    private val strikeScore: Int = 10
 
     private fun switchPlayer() {
         currentPlayer = (currentPlayer + 1) % playerList.size
     }
 
     fun setFrameScore(firstRoll: Int, secondRoll: Int = 0) {
-        if(currentFrame < MAX_FRAME) {
+        if(currentFrame < maxNoOfFrame) {
             rollBalls(firstRoll, secondRoll)
             switchPlayer()
-            updateFrames()
+            updateCurrentFrame()
         }
     }
 
-    private fun updateFrames() {
+    private fun updateCurrentFrame() {
         if (currentPlayer == playerList.size - 1) {
             currentFrame++
         }
@@ -28,7 +29,7 @@ class MultiPlayerGame(private val playerList: List<Game>) {
 
     private fun rollBalls(firstRoll: Int, secondRoll: Int) {
         playerList[currentPlayer].rollBall(firstRoll)
-        if (firstRoll != 10) {
+        if (firstRoll != strikeScore) {
             playerList[currentPlayer].rollBall(secondRoll)
         }
     }
